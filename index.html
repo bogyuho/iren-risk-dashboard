@@ -28,7 +28,8 @@
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: var(--paper);
+      background:
+        linear-gradient(180deg, #edf5f0 0, #f6f8fa 270px, #f6f8fa 100%);
       color: var(--ink);
       letter-spacing: 0;
       line-height: 1.55;
@@ -77,30 +78,64 @@
     .wrap {
       width: min(100%, 980px);
       margin: 0 auto;
-      padding: 18px;
+      padding: 16px;
     }
 
     .hero {
-      background: var(--white);
+      background: transparent;
       border-bottom: 1px solid var(--line);
     }
 
+    .image-shell {
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(24, 24, 24, 0.12);
+      background: #181818;
+    }
+
     .hero img {
-      max-height: 260px;
+      max-height: 170px;
       object-fit: cover;
+      opacity: 0.86;
+    }
+
+    .image-copy {
+      position: absolute;
+      left: 16px;
+      right: 16px;
+      bottom: 14px;
+      color: #ffffff;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.55);
+    }
+
+    .image-copy b,
+    .image-copy span {
+      display: block;
+      overflow-wrap: anywhere;
+    }
+
+    .image-copy b {
+      font-size: 22px;
+      line-height: 1.12;
+    }
+
+    .image-copy span {
+      margin-top: 4px;
+      font-size: 13px;
+      font-weight: 700;
     }
 
     .hero-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+      grid-template-columns: minmax(300px, 0.9fr) minmax(0, 1.1fr);
       gap: 18px;
       align-items: stretch;
-      margin-top: 18px;
+      margin-top: 14px;
     }
 
     .lead {
       color: var(--muted);
-      font-size: 16px;
+      font-size: 15px;
     }
 
     .stamp {
@@ -112,8 +147,8 @@
     .scoreline {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-top: 16px;
+      gap: 8px;
+      margin-top: 14px;
     }
 
     .metric,
@@ -126,6 +161,7 @@
       border: 1px solid var(--line);
       border-radius: 8px;
       padding: 14px;
+      box-shadow: 0 8px 24px rgba(24, 24, 24, 0.05);
     }
 
     .metric b {
@@ -140,10 +176,14 @@
     }
 
     .metric {
-      min-height: 88px;
+      min-height: 76px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+    }
+
+    .metric b {
+      font-size: 18px;
     }
 
     .risk h3 {
@@ -164,6 +204,28 @@
       text-transform: uppercase;
     }
 
+    .hero-note {
+      margin-top: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #ffffff;
+      padding: 14px;
+      box-shadow: 0 8px 24px rgba(24, 24, 24, 0.05);
+    }
+
+    .hero-note b {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 13px;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .hero-note p {
+      margin: 0;
+      font-weight: 650;
+    }
+
     .signal {
       display: inline-flex;
       align-items: center;
@@ -177,10 +239,16 @@
       font-weight: 700;
     }
 
+    .desktop-title {
+      margin-top: 4px;
+    }
+
     .tree-panel {
       display: grid;
-      gap: 12px;
+      gap: 11px;
       min-height: 100%;
+      border-color: #b7d7c9;
+      background: #fbfdfb;
     }
 
     .tree-top {
@@ -191,7 +259,7 @@
     }
 
     .tree-score {
-      font-size: 42px;
+      font-size: 48px;
       font-weight: 800;
       line-height: 1;
     }
@@ -209,7 +277,7 @@
 
     .tree-visual {
       width: 100%;
-      max-width: 330px;
+      max-width: 270px;
       margin: 0 auto;
     }
 
@@ -278,6 +346,38 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 8px;
+    }
+
+    .quick-read {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+
+    .quick-read div {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px;
+      background: #ffffff;
+      min-width: 0;
+    }
+
+    .quick-read b,
+    .quick-read span {
+      display: block;
+      overflow-wrap: anywhere;
+    }
+
+    .quick-read b {
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .quick-read span {
+      margin-top: 2px;
+      font-weight: 750;
+      line-height: 1.28;
     }
 
     .tree-check {
@@ -441,24 +541,42 @@
 
     @media (max-width: 720px) {
       .wrap {
-        padding: 16px;
+        padding: 14px;
       }
 
       h1 {
-        font-size: 26px;
+        font-size: 28px;
       }
 
       .hero-grid {
         grid-template-columns: 1fr;
+        gap: 12px;
       }
 
-      .scoreline,
       .grid {
         grid-template-columns: 1fr;
       }
 
+      .scoreline {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 7px;
+      }
+
+      .metric {
+        min-height: 68px;
+        padding: 10px;
+      }
+
+      .metric b {
+        font-size: 14px;
+      }
+
+      .metric span {
+        font-size: 12px;
+      }
+
       .tree-score {
-        font-size: 36px;
+        font-size: 44px;
       }
 
       .tree-stage {
@@ -474,23 +592,26 @@
       }
 
       .hero img {
-        max-height: 210px;
+        max-height: 118px;
+      }
+
+      .tree-visual {
+        max-width: 220px;
       }
     }
   </style>
 </head>
 <body>
   <header class="hero">
-    <img id="heroImage" alt="IREN Childress data center">
+    <div class="image-shell">
+      <img id="heroImage" alt="IREN Childress data center">
+      <div class="image-copy">
+        <b>IREN 실행리스크</b>
+        <span>공사 진행, Microsoft acceptance 전</span>
+      </div>
+    </div>
     <div class="wrap">
       <div class="hero-grid">
-        <div>
-          <p class="signal">실행상태 먼저 보고, 세부 리스크는 아래에서 확인</p>
-          <h1 id="title">IREN 실행리스크</h1>
-          <p id="lead" class="lead"></p>
-          <p id="stamp" class="stamp"></p>
-          <div id="metrics" class="scoreline"></div>
-        </div>
         <section class="tree-panel" aria-label="실행 성숙도">
           <div class="tree-top">
             <div>
@@ -501,9 +622,24 @@
           </div>
           <div class="tree-visual" id="treeVisual"></div>
           <div class="tree-progress"><i id="treeProgress"></i></div>
+          <div class="quick-read">
+            <div><b>병목</b><span id="treeBlocker"></span></div>
+            <div><b>다음 확인</b><span id="treeNextEvent"></span></div>
+          </div>
           <p class="lead" id="treeInterpretation"></p>
           <div class="tree-checks" id="treeChecks"></div>
         </section>
+        <div>
+          <p class="signal">실행상태 먼저 보고, 세부 리스크는 아래에서 확인</p>
+          <h1 id="title" class="desktop-title">IREN 실행리스크</h1>
+          <p id="lead" class="lead"></p>
+          <p id="stamp" class="stamp"></p>
+          <div id="metrics" class="scoreline"></div>
+          <div class="hero-note">
+            <b>현재 해석</b>
+            <p id="heroThesis"></p>
+          </div>
+        </div>
       </div>
     </div>
   </header>
@@ -612,6 +748,7 @@
     text("lead", `판정: ${data.verdict}`);
     text("stamp", `업데이트: ${data.updatedAt}`);
     text("thesis", data.thesis);
+    text("heroThesis", data.thesis);
 
     document.getElementById("metrics").innerHTML = data.summaryMetrics
       .map((item) => `<div class="metric"><b>${item.value}</b><span>${item.label}</span></div>`)
@@ -620,6 +757,8 @@
     document.getElementById("treeLabel").textContent = data.executionTree.label;
     document.getElementById("treeScore").textContent = data.executionTree.progress;
     document.getElementById("treeStage").textContent = data.executionTree.stage;
+    document.getElementById("treeBlocker").textContent = data.executionTree.blocker;
+    document.getElementById("treeNextEvent").textContent = data.executionTree.nextEvent;
     document.getElementById("treeInterpretation").textContent = data.executionTree.interpretation;
     document.getElementById("treeProgress").style.width = `${data.executionTree.progress}%`;
     document.getElementById("treeVisual").innerHTML = treeSvg(data.executionTree.progress);

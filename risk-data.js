@@ -8,6 +8,8 @@ window.IREN_RISK_DATA = {
     progress: 48,
     label: "실행 성숙도",
     stage: "공사 진행, acceptance 전",
+    blocker: "Microsoft acceptance",
+    nextEvent: "Sweetwater 전력 확인",
     interpretation:
       "뿌리와 줄기는 자랐다. 계약/자금/부지는 확인됐지만, 가지와 잎에 해당하는 commissioning, cluster integration, Microsoft acceptance는 아직 덜 자랐다.",
     checkpoints: [
