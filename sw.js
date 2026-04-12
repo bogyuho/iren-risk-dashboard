@@ -1,7 +1,8 @@
-const CACHE_NAME = "iren-risk-dashboard-v3";
+const CACHE_NAME = "iren-risk-dashboard-v4";
 const ASSETS = [
   "./",
   "./index.html",
+  "./theme.css",
   "./risk-data.js",
   "./manifest.json",
   "./icon.svg"
