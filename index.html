@@ -111,6 +111,7 @@
     .metric,
     .risk,
     .note,
+    .install,
     .source {
       background: var(--white);
       border: 1px solid var(--line);
@@ -219,6 +220,36 @@
       font-size: 14px;
     }
 
+    .install {
+      display: grid;
+      gap: 10px;
+    }
+
+    .install button {
+      width: 100%;
+      border: 0;
+      border-radius: 8px;
+      background: var(--ink);
+      color: var(--white);
+      padding: 12px 14px;
+      font: inherit;
+      font-weight: 700;
+    }
+
+    .install button:disabled {
+      background: #9aa1a8;
+    }
+
+    .install ol {
+      margin: 0;
+      padding-left: 22px;
+      color: var(--muted);
+    }
+
+    .install li {
+      margin: 4px 0;
+    }
+
     @media (max-width: 720px) {
       .wrap {
         padding: 16px;
@@ -269,6 +300,15 @@
     </section>
 
     <section>
+      <h2>홈화면 추가</h2>
+      <div class="install">
+        <p id="installMessage">브라우저 메뉴에서 홈화면에 추가할 수 있다.</p>
+        <button id="installButton" type="button">홈화면에 추가</button>
+        <ol id="installSteps"></ol>
+      </div>
+    </section>
+
+    <section>
       <h2>공식 이미지 기준</h2>
       <img id="secondaryImage" alt="IREN Sweetwater substation">
       <p class="stamp">공식 이미지는 공정률 판정 자료가 아니라 위치/자산 맥락 확인용이다.</p>
@@ -283,6 +323,7 @@
   <script src="./risk-data.js"></script>
   <script>
     const data = window.IREN_RISK_DATA;
+    let deferredInstallPrompt = null;
 
     function text(id, value) {
       document.getElementById(id).textContent = value;
@@ -328,6 +369,54 @@
     document.getElementById("sources").innerHTML = data.sources
       .map((source) => `<div class="source"><a href="${source.url}">${source.label}</a></div>`)
       .join("");
+
+    const installButton = document.getElementById("installButton");
+    const installMessage = document.getElementById("installMessage");
+    const installSteps = document.getElementById("installSteps");
+    const userAgent = navigator.userAgent || "";
+    const isIOS = /iPad|iPhone|iPod/.test(userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    const isStandalone = window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone;
+
+    function setInstallSteps(steps) {
+      installSteps.innerHTML = steps.map((step) => `<li>${step}</li>`).join("");
+    }
+
+    if (isStandalone) {
+      installMessage.textContent = "이미 홈화면 앱 모드로 열려 있다.";
+      installButton.disabled = true;
+      installButton.textContent = "추가 완료";
+      setInstallSteps([]);
+    } else if (isIOS) {
+      installMessage.textContent = "iPhone/iPad는 보안 제한 때문에 페이지 버튼으로 바로 설치할 수 없다.";
+      installButton.textContent = "아래 순서로 추가";
+      installButton.disabled = true;
+      setInstallSteps(["Safari 하단 공유 버튼을 누른다.", "\"홈 화면에 추가\"를 누른다.", "추가를 누른다."]);
+    } else {
+      installMessage.textContent = "Chrome/Edge에서 설치 조건이 충족되면 이 버튼으로 추가할 수 있다.";
+      installButton.disabled = true;
+      installButton.textContent = "설치 준비 중";
+      setInstallSteps(["버튼이 활성화되지 않으면 브라우저 메뉴를 연다.", "\"앱 설치\" 또는 \"홈 화면에 추가\"를 누른다."]);
+    }
+
+    window.addEventListener("beforeinstallprompt", (event) => {
+      event.preventDefault();
+      deferredInstallPrompt = event;
+      installButton.disabled = false;
+      installButton.textContent = "홈화면에 추가";
+      installMessage.textContent = "설치할 준비가 됐다.";
+    });
+
+    installButton.addEventListener("click", async () => {
+      if (!deferredInstallPrompt) {
+        return;
+      }
+
+      deferredInstallPrompt.prompt();
+      await deferredInstallPrompt.userChoice;
+      deferredInstallPrompt = null;
+      installButton.disabled = true;
+      installButton.textContent = "추가 요청 완료";
+    });
 
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {
