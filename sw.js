@@ -1,4 +1,4 @@
-const CACHE_NAME = "iren-risk-dashboard-v2";
+const CACHE_NAME = "iren-risk-dashboard-v3";
 const ASSETS = [
   "./",
   "./index.html",
