@@ -4,21 +4,23 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>IREN 실행리스크</title>
-  <meta name="theme-color" content="#181818">
+  <meta name="theme-color" content="#f4f6f2">
   <meta name="description" content="IREN 실행리스크 추적 대시보드">
   <link rel="manifest" href="./manifest.json">
   <link rel="icon" href="./icon.svg" type="image/svg+xml">
   <style>
     :root {
-      --ink: #181818;
-      --muted: #5d646b;
-      --line: #d8dee4;
-      --paper: #f6f8fa;
-      --white: #ffffff;
+      --ink: #171717;
+      --soft-ink: #303435;
+      --muted: #687071;
+      --paper: #f4f6f2;
+      --surface: #ffffff;
+      --line: #d7ded7;
       --green: #159a68;
       --cyan: #087ea4;
-      --yellow: #d4a017;
+      --yellow: #d2a11f;
       --red: #cf3f3f;
+      --shadow: 0 10px 28px rgba(27, 38, 34, 0.08);
     }
 
     * {
@@ -28,22 +30,21 @@
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background:
-        linear-gradient(180deg, #edf5f0 0, #f6f8fa 270px, #f6f8fa 100%);
+      background: var(--paper);
       color: var(--ink);
       letter-spacing: 0;
-      line-height: 1.55;
+      line-height: 1.5;
+    }
+
+    a {
+      color: var(--cyan);
+      text-decoration: none;
     }
 
     img {
       display: block;
       width: 100%;
       height: auto;
-    }
-
-    a {
-      color: var(--cyan);
-      text-decoration: none;
     }
 
     h1,
@@ -54,234 +55,126 @@
     }
 
     h1 {
-      margin: 0 0 8px;
-      font-size: 30px;
-      line-height: 1.15;
+      margin: 8px 0 10px;
+      font-size: 34px;
+      line-height: 1.08;
     }
 
     h2 {
       margin: 28px 0 12px;
-      font-size: 21px;
+      font-size: 20px;
       line-height: 1.25;
     }
 
     h3 {
-      margin: 0 0 8px;
-      font-size: 17px;
-      line-height: 1.3;
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.28;
     }
 
     p {
-      margin: 0 0 10px;
+      margin: 0;
     }
 
     .wrap {
-      width: min(100%, 980px);
+      width: min(100%, 1060px);
       margin: 0 auto;
       padding: 16px;
     }
 
-    .hero {
-      background: transparent;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .image-shell {
-      position: relative;
-      overflow: hidden;
-      border-bottom: 1px solid rgba(24, 24, 24, 0.12);
-      background: #181818;
-    }
-
-    .hero img {
-      max-height: 170px;
-      object-fit: cover;
-      opacity: 0.86;
-    }
-
-    .image-copy {
-      position: absolute;
-      left: 16px;
-      right: 16px;
-      bottom: 14px;
-      color: #ffffff;
-      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.55);
-    }
-
-    .image-copy b,
-    .image-copy span {
-      display: block;
-      overflow-wrap: anywhere;
-    }
-
-    .image-copy b {
-      font-size: 22px;
-      line-height: 1.12;
-    }
-
-    .image-copy span {
-      margin-top: 4px;
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      color: var(--muted);
       font-size: 13px;
       font-weight: 700;
     }
 
-    .hero-grid {
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.76);
+      padding: 4px 9px;
+    }
+
+    .command {
       display: grid;
-      grid-template-columns: minmax(300px, 0.9fr) minmax(0, 1.1fr);
-      gap: 18px;
+      grid-template-columns: minmax(310px, 0.94fr) minmax(0, 1.06fr);
+      gap: 14px;
       align-items: stretch;
-      margin-top: 14px;
+      padding-top: 12px;
     }
 
-    .lead {
-      color: var(--muted);
-      font-size: 15px;
-    }
-
-    .stamp {
-      color: var(--muted);
-      font-size: 14px;
-      margin-top: 12px;
-    }
-
-    .scoreline {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      margin-top: 14px;
-    }
-
-    .metric,
+    .panel,
     .risk,
     .note,
     .install,
-    .tree-panel,
     .source {
-      background: var(--white);
+      min-width: 0;
       border: 1px solid var(--line);
       border-radius: 8px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .growth {
       padding: 14px;
-      box-shadow: 0 8px 24px rgba(24, 24, 24, 0.05);
+      border-color: #b9d8c8;
     }
 
-    .metric b {
-      display: block;
-      font-size: 21px;
-    }
-
-    .metric span,
-    .risk span {
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .metric {
-      min-height: 76px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .metric b {
-      font-size: 18px;
-    }
-
-    .risk h3 {
-      min-height: 44px;
-    }
-
-    .risk .risk-next {
-      margin-top: 12px;
-      padding-top: 10px;
-      border-top: 1px solid var(--line);
-    }
-
-    .risk .risk-next b {
-      display: block;
-      margin-bottom: 3px;
-      font-size: 12px;
-      color: var(--muted);
-      text-transform: uppercase;
-    }
-
-    .hero-note {
-      margin-top: 12px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: #ffffff;
-      padding: 14px;
-      box-shadow: 0 8px 24px rgba(24, 24, 24, 0.05);
-    }
-
-    .hero-note b {
-      display: block;
-      margin-bottom: 6px;
-      font-size: 13px;
-      color: var(--muted);
-      text-transform: uppercase;
-    }
-
-    .hero-note p {
-      margin: 0;
-      font-weight: 650;
-    }
-
-    .signal {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      margin-bottom: 10px;
-      padding: 5px 9px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      color: var(--muted);
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    .desktop-title {
-      margin-top: 4px;
-    }
-
-    .tree-panel {
-      display: grid;
-      gap: 11px;
-      min-height: 100%;
-      border-color: #b7d7c9;
-      background: #fbfdfb;
-    }
-
-    .tree-top {
+    .growth-head {
       display: flex;
       justify-content: space-between;
       gap: 12px;
       align-items: flex-start;
     }
 
-    .tree-score {
-      font-size: 48px;
+    .growth-head > * {
+      min-width: 0;
+    }
+
+    .kicker {
+      color: var(--muted);
+      font-size: 12px;
       font-weight: 800;
-      line-height: 1;
+      text-transform: uppercase;
     }
 
-    .tree-score small {
-      color: var(--muted);
-      font-size: 17px;
+    .score {
+      margin-top: 4px;
+      font-size: 58px;
+      font-weight: 850;
+      line-height: 0.95;
+      letter-spacing: 0;
     }
 
-    .tree-stage {
+    .score small {
       color: var(--muted);
-      font-size: 14px;
+      font-size: 20px;
+      font-weight: 750;
+    }
+
+    .stage {
+      max-width: 155px;
+      color: var(--soft-ink);
       text-align: right;
+      font-weight: 800;
+      line-height: 1.24;
+      overflow-wrap: anywhere;
     }
 
-    .tree-visual {
-      width: 100%;
-      max-width: 270px;
-      margin: 0 auto;
+    .tree-wrap {
+      width: min(100%, 260px);
+      margin: 4px auto 0;
     }
 
-    .tree-visual svg {
+    .tree-wrap svg {
       display: block;
       width: 100%;
       height: auto;
@@ -328,140 +221,228 @@
       fill: var(--red);
     }
 
-    .tree-progress {
-      height: 11px;
+    .progress {
+      height: 12px;
+      margin: 10px 0 12px;
       overflow: hidden;
-      background: #e8edf2;
       border-radius: 8px;
+      background: #e6ece7;
     }
 
-    .tree-progress i {
+    .progress i {
       display: block;
       height: 100%;
       border-radius: 8px;
       background: linear-gradient(90deg, var(--red), var(--yellow), var(--green));
     }
 
-    .tree-checks {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
-    }
-
-    .quick-read {
+    .quick {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 8px;
-    }
-
-    .quick-read div {
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 10px;
-      background: #ffffff;
       min-width: 0;
     }
 
-    .quick-read b,
-    .quick-read span {
+    .quick div,
+    .phase div {
+      min-width: 0;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcfb;
+      padding: 10px;
+    }
+
+    .quick b,
+    .quick span,
+    .phase b,
+    .phase span {
       display: block;
       overflow-wrap: anywhere;
     }
 
-    .quick-read b {
-      font-size: 12px;
+    .quick b,
+    .phase b {
       color: var(--muted);
+      font-size: 12px;
       text-transform: uppercase;
     }
 
-    .quick-read span {
+    .quick span,
+    .phase span {
       margin-top: 2px;
-      font-weight: 750;
-      line-height: 1.28;
+      font-weight: 800;
+      line-height: 1.26;
     }
 
-    .tree-check {
+    .summary {
+      padding: 16px;
+    }
+
+    .lead {
+      max-width: 680px;
+      color: var(--soft-ink);
+      font-size: 16px;
+      font-weight: 650;
+    }
+
+    .stamp {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .metric-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .metric {
+      min-height: 80px;
       border: 1px solid var(--line);
       border-radius: 8px;
-      padding: 9px;
-      background: #fbfcfd;
-      min-width: 0;
+      background: #fbfcfb;
+      padding: 11px;
     }
 
-    .tree-check b,
-    .tree-check span {
+    .metric b,
+    .metric span {
       display: block;
       overflow-wrap: anywhere;
     }
 
-    .tree-check b {
-      font-size: 13px;
+    .metric b {
+      font-size: 18px;
+      line-height: 1.2;
     }
 
-    .tree-check span {
+    .metric span {
+      margin-top: 6px;
       color: var(--muted);
       font-size: 12px;
+      font-weight: 750;
+    }
+
+    .phase {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-top: 14px;
     }
 
     .tone-green {
-      border-left: 5px solid var(--green);
+      border-left: 5px solid var(--green) !important;
     }
 
     .tone-cyan {
-      border-left: 5px solid var(--cyan);
+      border-left: 5px solid var(--cyan) !important;
     }
 
     .tone-yellow {
-      border-left: 5px solid var(--yellow);
+      border-left: 5px solid var(--yellow) !important;
     }
 
     .tone-red {
-      border-left: 5px solid var(--red);
+      border-left: 5px solid var(--red) !important;
     }
 
-    .grid {
+    .evidence {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .evidence img {
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: #e8eceb;
+    }
+
+    .risk-map {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .risk-strip {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 6px;
+      margin-top: 14px;
+    }
+
+    .strip-bar {
+      display: flex;
+      height: 15px;
+      overflow: hidden;
+      border-radius: 8px;
+      background: #e7ece9;
+    }
+
+    .strip-bar i {
+      display: block;
+      height: 100%;
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 750;
+    }
+
+    .legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .legend i {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .risk-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 12px;
     }
 
+    .risk {
+      padding: 13px;
+    }
+
+    .risk-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
     .status {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      padding: 4px 9px;
+      flex: 0 0 auto;
       border-radius: 8px;
-      color: #111111;
-      background: #f3f4f6;
-      font-weight: 700;
-      font-size: 13px;
-    }
-
-    .dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--yellow);
-    }
-
-    .green .dot {
-      background: var(--green);
-    }
-
-    .red .dot {
-      background: var(--red);
-    }
-
-    .cyan .dot {
-      background: var(--cyan);
+      background: #f2f4f3;
+      padding: 4px 8px;
+      color: var(--soft-ink);
+      font-size: 12px;
+      font-weight: 850;
     }
 
     .bar {
-      height: 9px;
+      height: 8px;
       overflow: hidden;
-      background: #e8edf2;
       border-radius: 8px;
-      margin: 12px 0 8px;
+      background: #e8edf2;
+      margin: 12px 0 9px;
     }
 
     .bar i {
@@ -483,6 +464,19 @@
       background: var(--cyan);
     }
 
+    .risk p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .risk-next {
+      margin-top: 10px;
+      padding-top: 9px;
+      border-top: 1px solid var(--line);
+      color: var(--soft-ink) !important;
+      font-weight: 650;
+    }
+
     .watch {
       display: grid;
       gap: 10px;
@@ -492,21 +486,19 @@
     }
 
     .watch li {
-      background: var(--white);
       border: 1px solid var(--line);
       border-left: 5px solid var(--cyan);
       border-radius: 8px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
       padding: 12px 14px;
+      font-weight: 700;
     }
 
-    .sources {
-      display: grid;
-      gap: 10px;
-    }
-
+    .note,
+    .install,
     .source {
-      overflow-wrap: anywhere;
-      font-size: 14px;
+      padding: 14px;
     }
 
     .install {
@@ -519,14 +511,14 @@
       border: 0;
       border-radius: 8px;
       background: var(--ink);
-      color: var(--white);
+      color: #fff;
       padding: 12px 14px;
       font: inherit;
-      font-weight: 700;
+      font-weight: 800;
     }
 
     .install button:disabled {
-      background: #9aa1a8;
+      background: #9ba3a2;
     }
 
     .install ol {
@@ -535,112 +527,126 @@
       color: var(--muted);
     }
 
-    .install li {
-      margin: 4px 0;
+    .sources {
+      display: grid;
+      gap: 10px;
     }
 
-    @media (max-width: 720px) {
+    .source {
+      overflow-wrap: anywhere;
+      font-size: 14px;
+    }
+
+    @media (max-width: 780px) {
       .wrap {
-        padding: 14px;
+        padding: 13px;
+      }
+
+      .topbar {
+        align-items: flex-start;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+
+      .command,
+      .risk-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .growth {
+        order: -1;
       }
 
       h1 {
-        font-size: 28px;
+        font-size: 29px;
       }
 
-      .hero-grid {
+      .score {
+        font-size: 52px;
+      }
+
+      .stage {
+        text-align: left;
+        max-width: none;
+        font-size: 13px;
+      }
+
+      .growth-head {
+        display: grid;
         grid-template-columns: 1fr;
-        gap: 12px;
       }
 
-      .grid {
-        grid-template-columns: 1fr;
+      .tree-wrap {
+        max-width: 210px;
       }
 
-      .scoreline {
+      .metric-row {
         grid-template-columns: repeat(3, 1fr);
-        gap: 7px;
       }
 
       .metric {
-        min-height: 68px;
-        padding: 10px;
+        min-height: 70px;
+        padding: 9px;
       }
 
       .metric b {
-        font-size: 14px;
+        font-size: 13px;
       }
 
       .metric span {
-        font-size: 12px;
+        font-size: 11px;
       }
 
-      .tree-score {
-        font-size: 44px;
-      }
-
-      .tree-stage {
-        text-align: left;
-      }
-
-      .tree-top {
-        flex-direction: column;
-      }
-
-      .tree-checks {
+      .phase,
+      .evidence {
         grid-template-columns: repeat(2, 1fr);
       }
 
-      .hero img {
-        max-height: 118px;
-      }
-
-      .tree-visual {
-        max-width: 220px;
+      .quick {
+        grid-template-columns: 1fr;
       }
     }
   </style>
 </head>
 <body>
-  <header class="hero">
-    <div class="image-shell">
-      <img id="heroImage" alt="IREN Childress data center">
-      <div class="image-copy">
-        <b>IREN 실행리스크</b>
-        <span>공사 진행, Microsoft acceptance 전</span>
-      </div>
+  <header class="wrap">
+    <div class="topbar">
+      <span class="pill">IREN Execution</span>
+      <span id="stamp"></span>
     </div>
-    <div class="wrap">
-      <div class="hero-grid">
-        <section class="tree-panel" aria-label="실행 성숙도">
-          <div class="tree-top">
-            <div>
-              <p class="stamp" id="treeLabel"></p>
-              <div class="tree-score"><span id="treeScore">0</span><small>%</small></div>
-            </div>
-            <p class="tree-stage" id="treeStage"></p>
+    <div class="command">
+      <section class="panel growth" aria-label="실행 성숙도">
+        <div class="growth-head">
+          <div>
+            <p class="kicker" id="treeLabel"></p>
+            <div class="score"><span id="treeScore">0</span><small>%</small></div>
           </div>
-          <div class="tree-visual" id="treeVisual"></div>
-          <div class="tree-progress"><i id="treeProgress"></i></div>
-          <div class="quick-read">
-            <div><b>병목</b><span id="treeBlocker"></span></div>
-            <div><b>다음 확인</b><span id="treeNextEvent"></span></div>
-          </div>
-          <p class="lead" id="treeInterpretation"></p>
-          <div class="tree-checks" id="treeChecks"></div>
-        </section>
-        <div>
-          <p class="signal">실행상태 먼저 보고, 세부 리스크는 아래에서 확인</p>
-          <h1 id="title" class="desktop-title">IREN 실행리스크</h1>
-          <p id="lead" class="lead"></p>
-          <p id="stamp" class="stamp"></p>
-          <div id="metrics" class="scoreline"></div>
-          <div class="hero-note">
-            <b>현재 해석</b>
-            <p id="heroThesis"></p>
-          </div>
+          <p class="stage" id="treeStage"></p>
         </div>
-      </div>
+        <div class="tree-wrap" id="treeVisual"></div>
+        <div class="progress"><i id="treeProgress"></i></div>
+        <div class="quick">
+          <div><b>병목</b><span id="treeBlocker"></span></div>
+          <div><b>다음 확인</b><span id="treeNextEvent"></span></div>
+        </div>
+        <div class="phase" id="treeChecks"></div>
+      </section>
+
+      <section class="panel summary">
+        <p class="kicker">현재 판정</p>
+        <h1 id="title">IREN 실행리스크</h1>
+        <p id="lead" class="lead"></p>
+        <div id="metrics" class="metric-row"></div>
+        <div class="risk-strip">
+          <div id="riskStrip" class="strip-bar"></div>
+          <div id="riskLegend" class="legend"></div>
+        </div>
+        <div class="evidence">
+          <img id="heroImage" alt="IREN Childress data center">
+          <img id="secondaryImage" alt="IREN Sweetwater substation">
+        </div>
+      </section>
     </div>
   </header>
 
@@ -654,7 +660,7 @@
 
     <section>
       <h2>리스크 보드</h2>
-      <div id="risks" class="grid"></div>
+      <div id="risks" class="risk-grid"></div>
     </section>
 
     <section>
@@ -669,12 +675,6 @@
         <button id="installButton" type="button">홈화면에 추가</button>
         <ol id="installSteps"></ol>
       </div>
-    </section>
-
-    <section>
-      <h2>공식 이미지 기준</h2>
-      <img id="secondaryImage" alt="IREN Sweetwater substation">
-      <p class="stamp">공식 이미지는 공정률 판정 자료가 아니라 위치/자산 맥락 확인용이다.</p>
     </section>
 
     <section>
@@ -699,9 +699,16 @@
       return "";
     }
 
+    function toneColor(tone) {
+      if (tone === "green") return "var(--green)";
+      if (tone === "cyan") return "var(--cyan)";
+      if (tone === "red") return "var(--red)";
+      return "var(--yellow)";
+    }
+
     function treeSvg(progress) {
       const level = Math.max(0, Math.min(100, progress));
-      const trunkHeight = 96 + Math.round(level * 0.9);
+      const trunkHeight = 98 + Math.round(level * 0.82);
       const topY = 305 - trunkHeight;
       const branchOpacity = level >= 35 ? 1 : 0.35;
       const leafOpacity = level >= 50 ? 1 : 0.28;
@@ -745,10 +752,9 @@
     document.getElementById("heroImage").src = data.heroImage;
     document.getElementById("secondaryImage").src = data.secondaryImage;
     text("title", data.title);
-    text("lead", `판정: ${data.verdict}`);
-    text("stamp", `업데이트: ${data.updatedAt}`);
+    text("lead", data.verdict);
+    text("stamp", data.updatedAt);
     text("thesis", data.thesis);
-    text("heroThesis", data.thesis);
 
     document.getElementById("metrics").innerHTML = data.summaryMetrics
       .map((item) => `<div class="metric"><b>${item.value}</b><span>${item.label}</span></div>`)
@@ -759,36 +765,52 @@
     document.getElementById("treeStage").textContent = data.executionTree.stage;
     document.getElementById("treeBlocker").textContent = data.executionTree.blocker;
     document.getElementById("treeNextEvent").textContent = data.executionTree.nextEvent;
-    document.getElementById("treeInterpretation").textContent = data.executionTree.interpretation;
     document.getElementById("treeProgress").style.width = `${data.executionTree.progress}%`;
     document.getElementById("treeVisual").innerHTML = treeSvg(data.executionTree.progress);
     document.getElementById("treeChecks").innerHTML = data.executionTree.checkpoints
-      .map(
-        (item) => `
-          <div class="tree-check tone-${item.tone}">
-            <b>${item.label}</b>
-            <span>${item.status}</span>
-          </div>
-        `
-      )
+      .map((item) => `
+        <div class="tone-${item.tone}">
+          <b>${item.label}</b>
+          <span>${item.status}</span>
+        </div>
+      `)
+      .join("");
+
+    const counts = data.risks.reduce((acc, risk) => {
+      acc[risk.tone] = (acc[risk.tone] || 0) + 1;
+      return acc;
+    }, {});
+    const total = data.risks.length;
+    const order = [
+      ["green", "개선"],
+      ["cyan", "진행"],
+      ["yellow", "주의"],
+      ["red", "병목"]
+    ];
+    document.getElementById("riskStrip").innerHTML = order
+      .map(([tone]) => `<i style="width:${((counts[tone] || 0) / total) * 100}%; background:${toneColor(tone)}"></i>`)
+      .join("");
+    document.getElementById("riskLegend").innerHTML = order
+      .filter(([tone]) => counts[tone])
+      .map(([tone, label]) => `<span><i style="background:${toneColor(tone)}"></i>${label} ${counts[tone]}</span>`)
       .join("");
 
     document.getElementById("risks").innerHTML = data.risks
-      .map(
-        (risk) => `
-          <article class="risk ${risk.tone}">
+      .map((risk) => `
+        <article class="risk tone-${risk.tone}">
+          <div class="risk-head">
             <h3>${risk.title}</h3>
-            <p class="status"><i class="dot"></i>${risk.status}</p>
-            <div class="bar"><i class="${barClass(risk.tone)}" style="width: ${risk.score}%"></i></div>
-            <span>${risk.why}</span>
-            <p class="stamp risk-next"><b>다음 확인</b>${risk.next}</p>
-          </article>
-        `
-      )
+            <span class="status">${risk.status}</span>
+          </div>
+          <div class="bar"><i class="${barClass(risk.tone)}" style="width: ${risk.score}%"></i></div>
+          <p>${risk.why}</p>
+          <p class="risk-next">${risk.next}</p>
+        </article>
+      `)
       .join("");
 
     document.getElementById("watchlist").innerHTML = data.watchlist
-      .map((item, index) => `<li><b>${index + 1}. ${item}</b></li>`)
+      .map((item, index) => `<li>${index + 1}. ${item}</li>`)
       .join("");
 
     document.getElementById("sources").innerHTML = data.sources
@@ -812,15 +834,15 @@
       installButton.textContent = "추가 완료";
       setInstallSteps([]);
     } else if (isIOS) {
-      installMessage.textContent = "iPhone/iPad는 보안 제한 때문에 페이지 버튼으로 바로 설치할 수 없다.";
+      installMessage.textContent = "iPhone/iPad는 Safari 공유 메뉴에서 추가한다.";
       installButton.textContent = "아래 순서로 추가";
       installButton.disabled = true;
-      setInstallSteps(["Safari 하단 공유 버튼을 누른다.", "\"홈 화면에 추가\"를 누른다.", "추가를 누른다."]);
+      setInstallSteps(["Safari 하단 공유 버튼", "\"홈 화면에 추가\"", "추가"]);
     } else {
-      installMessage.textContent = "Chrome/Edge에서 설치 조건이 충족되면 이 버튼으로 추가할 수 있다.";
+      installMessage.textContent = "Chrome/Edge에서 설치 조건이 충족되면 버튼이 활성화된다.";
       installButton.disabled = true;
       installButton.textContent = "설치 준비 중";
-      setInstallSteps(["버튼이 활성화되지 않으면 브라우저 메뉴를 연다.", "\"앱 설치\" 또는 \"홈 화면에 추가\"를 누른다."]);
+      setInstallSteps(["브라우저 메뉴", "\"앱 설치\" 또는 \"홈 화면에 추가\""]);
     }
 
     window.addEventListener("beforeinstallprompt", (event) => {
@@ -832,10 +854,7 @@
     });
 
     installButton.addEventListener("click", async () => {
-      if (!deferredInstallPrompt) {
-        return;
-      }
-
+      if (!deferredInstallPrompt) return;
       deferredInstallPrompt.prompt();
       await deferredInstallPrompt.userChoice;
       deferredInstallPrompt = null;
