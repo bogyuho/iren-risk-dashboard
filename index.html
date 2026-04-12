@@ -90,6 +90,14 @@
       object-fit: cover;
     }
 
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+      gap: 18px;
+      align-items: stretch;
+      margin-top: 18px;
+    }
+
     .lead {
       color: var(--muted);
       font-size: 16px;
@@ -112,6 +120,7 @@
     .risk,
     .note,
     .install,
+    .tree-panel,
     .source {
       background: var(--white);
       border: 1px solid var(--line);
@@ -128,6 +137,186 @@
     .risk span {
       color: var(--muted);
       font-size: 14px;
+    }
+
+    .metric {
+      min-height: 88px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .risk h3 {
+      min-height: 44px;
+    }
+
+    .risk .risk-next {
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+    }
+
+    .risk .risk-next b {
+      display: block;
+      margin-bottom: 3px;
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .signal {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 10px;
+      padding: 5px 9px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .tree-panel {
+      display: grid;
+      gap: 12px;
+      min-height: 100%;
+    }
+
+    .tree-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .tree-score {
+      font-size: 42px;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .tree-score small {
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .tree-stage {
+      color: var(--muted);
+      font-size: 14px;
+      text-align: right;
+    }
+
+    .tree-visual {
+      width: 100%;
+      max-width: 330px;
+      margin: 0 auto;
+    }
+
+    .tree-visual svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .tree-trunk,
+    .tree-branch {
+      fill: none;
+      stroke: #66503a;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .tree-trunk {
+      stroke-width: 18;
+    }
+
+    .tree-branch {
+      stroke-width: 11;
+    }
+
+    .tree-ground {
+      fill: #dcefe7;
+    }
+
+    .tree-root {
+      fill: none;
+      stroke: #7a654d;
+      stroke-width: 7;
+      stroke-linecap: round;
+    }
+
+    .tree-leaf {
+      fill: var(--green);
+    }
+
+    .tree-leaf.pending {
+      fill: #d9dee3;
+      stroke: #b8c0c7;
+      stroke-width: 2;
+    }
+
+    .tree-fruit {
+      fill: var(--red);
+    }
+
+    .tree-progress {
+      height: 11px;
+      overflow: hidden;
+      background: #e8edf2;
+      border-radius: 8px;
+    }
+
+    .tree-progress i {
+      display: block;
+      height: 100%;
+      border-radius: 8px;
+      background: linear-gradient(90deg, var(--red), var(--yellow), var(--green));
+    }
+
+    .tree-checks {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .tree-check {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 9px;
+      background: #fbfcfd;
+      min-width: 0;
+    }
+
+    .tree-check b,
+    .tree-check span {
+      display: block;
+      overflow-wrap: anywhere;
+    }
+
+    .tree-check b {
+      font-size: 13px;
+    }
+
+    .tree-check span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .tone-green {
+      border-left: 5px solid var(--green);
+    }
+
+    .tone-cyan {
+      border-left: 5px solid var(--cyan);
+    }
+
+    .tone-yellow {
+      border-left: 5px solid var(--yellow);
+    }
+
+    .tone-red {
+      border-left: 5px solid var(--red);
     }
 
     .grid {
@@ -259,9 +448,29 @@
         font-size: 26px;
       }
 
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
       .scoreline,
       .grid {
         grid-template-columns: 1fr;
+      }
+
+      .tree-score {
+        font-size: 36px;
+      }
+
+      .tree-stage {
+        text-align: left;
+      }
+
+      .tree-top {
+        flex-direction: column;
+      }
+
+      .tree-checks {
+        grid-template-columns: repeat(2, 1fr);
       }
 
       .hero img {
@@ -274,10 +483,28 @@
   <header class="hero">
     <img id="heroImage" alt="IREN Childress data center">
     <div class="wrap">
-      <h1 id="title">IREN 실행리스크</h1>
-      <p id="lead" class="lead"></p>
-      <p id="stamp" class="stamp"></p>
-      <div id="metrics" class="scoreline"></div>
+      <div class="hero-grid">
+        <div>
+          <p class="signal">실행상태 먼저 보고, 세부 리스크는 아래에서 확인</p>
+          <h1 id="title">IREN 실행리스크</h1>
+          <p id="lead" class="lead"></p>
+          <p id="stamp" class="stamp"></p>
+          <div id="metrics" class="scoreline"></div>
+        </div>
+        <section class="tree-panel" aria-label="실행 성숙도">
+          <div class="tree-top">
+            <div>
+              <p class="stamp" id="treeLabel"></p>
+              <div class="tree-score"><span id="treeScore">0</span><small>%</small></div>
+            </div>
+            <p class="tree-stage" id="treeStage"></p>
+          </div>
+          <div class="tree-visual" id="treeVisual"></div>
+          <div class="tree-progress"><i id="treeProgress"></i></div>
+          <p class="lead" id="treeInterpretation"></p>
+          <div class="tree-checks" id="treeChecks"></div>
+        </section>
+      </div>
     </div>
   </header>
 
@@ -336,6 +563,48 @@
       return "";
     }
 
+    function treeSvg(progress) {
+      const level = Math.max(0, Math.min(100, progress));
+      const trunkHeight = 96 + Math.round(level * 0.9);
+      const topY = 305 - trunkHeight;
+      const branchOpacity = level >= 35 ? 1 : 0.35;
+      const leafOpacity = level >= 50 ? 1 : 0.28;
+      const fruitOpacity = level >= 78 ? 1 : 0.18;
+      const pendingOpacity = level >= 78 ? 0.25 : 0.9;
+
+      return `
+        <svg viewBox="0 0 360 340" role="img" aria-label="IREN execution tree">
+          <ellipse class="tree-ground" cx="180" cy="305" rx="128" ry="24"></ellipse>
+          <path class="tree-root" d="M178 300 C146 310, 126 313, 98 307"></path>
+          <path class="tree-root" d="M184 300 C214 312, 239 315, 267 307"></path>
+          <path class="tree-root" d="M181 300 C174 315, 164 324, 143 328"></path>
+          <path class="tree-trunk" d="M180 300 C176 254, 181 215, 180 ${topY}"></path>
+          <g style="opacity:${branchOpacity}">
+            <path class="tree-branch" d="M181 ${topY + 22} C144 ${topY + 3}, 126 ${topY - 16}, 108 ${topY - 42}"></path>
+            <path class="tree-branch" d="M182 ${topY + 8} C218 ${topY - 5}, 239 ${topY - 28}, 256 ${topY - 54}"></path>
+            <path class="tree-branch" d="M180 ${topY + 44} C210 ${topY + 37}, 232 ${topY + 26}, 264 ${topY + 12}"></path>
+          </g>
+          <g style="opacity:${leafOpacity}">
+            <circle class="tree-leaf" cx="103" cy="${topY - 48}" r="24"></circle>
+            <circle class="tree-leaf" cx="133" cy="${topY - 28}" r="22"></circle>
+            <circle class="tree-leaf" cx="251" cy="${topY - 60}" r="27"></circle>
+            <circle class="tree-leaf" cx="278" cy="${topY - 33}" r="21"></circle>
+            <circle class="tree-leaf" cx="270" cy="${topY + 12}" r="22"></circle>
+          </g>
+          <g style="opacity:${pendingOpacity}">
+            <circle class="tree-leaf pending" cx="158" cy="${topY - 58}" r="22"></circle>
+            <circle class="tree-leaf pending" cx="222" cy="${topY - 88}" r="19"></circle>
+            <circle class="tree-leaf pending" cx="302" cy="${topY - 4}" r="16"></circle>
+          </g>
+          <g style="opacity:${fruitOpacity}">
+            <circle class="tree-fruit" cx="246" cy="${topY - 43}" r="7"></circle>
+            <circle class="tree-fruit" cx="124" cy="${topY - 43}" r="7"></circle>
+            <circle class="tree-fruit" cx="274" cy="${topY + 2}" r="7"></circle>
+          </g>
+        </svg>
+      `;
+    }
+
     document.title = data.title;
     document.getElementById("heroImage").src = data.heroImage;
     document.getElementById("secondaryImage").src = data.secondaryImage;
@@ -348,6 +617,23 @@
       .map((item) => `<div class="metric"><b>${item.value}</b><span>${item.label}</span></div>`)
       .join("");
 
+    document.getElementById("treeLabel").textContent = data.executionTree.label;
+    document.getElementById("treeScore").textContent = data.executionTree.progress;
+    document.getElementById("treeStage").textContent = data.executionTree.stage;
+    document.getElementById("treeInterpretation").textContent = data.executionTree.interpretation;
+    document.getElementById("treeProgress").style.width = `${data.executionTree.progress}%`;
+    document.getElementById("treeVisual").innerHTML = treeSvg(data.executionTree.progress);
+    document.getElementById("treeChecks").innerHTML = data.executionTree.checkpoints
+      .map(
+        (item) => `
+          <div class="tree-check tone-${item.tone}">
+            <b>${item.label}</b>
+            <span>${item.status}</span>
+          </div>
+        `
+      )
+      .join("");
+
     document.getElementById("risks").innerHTML = data.risks
       .map(
         (risk) => `
@@ -356,7 +642,7 @@
             <p class="status"><i class="dot"></i>${risk.status}</p>
             <div class="bar"><i class="${barClass(risk.tone)}" style="width: ${risk.score}%"></i></div>
             <span>${risk.why}</span>
-            <p class="stamp">${risk.next}</p>
+            <p class="stamp risk-next"><b>다음 확인</b>${risk.next}</p>
           </article>
         `
       )

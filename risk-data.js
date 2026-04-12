@@ -4,6 +4,19 @@ window.IREN_RISK_DATA = {
   verdict: "중상 리스크, 그러나 추적 가능",
   thesis:
     "계약, 장비, 자금, 부지의 큰 뼈대는 확인된다. 하지만 2026년 Childress H1-H4 commissioning과 Microsoft acceptance 전까지 실행리스크를 낮게 보면 안 된다.",
+  executionTree: {
+    progress: 48,
+    label: "실행 성숙도",
+    stage: "공사 진행, acceptance 전",
+    interpretation:
+      "뿌리와 줄기는 자랐다. 계약/자금/부지는 확인됐지만, 가지와 잎에 해당하는 commissioning, cluster integration, Microsoft acceptance는 아직 덜 자랐다.",
+    checkpoints: [
+      { label: "계약/자금", status: "확인", tone: "green" },
+      { label: "공사", status: "진행", tone: "cyan" },
+      { label: "시운전", status: "대기", tone: "yellow" },
+      { label: "MS 승인", status: "미확인", tone: "red" }
+    ]
+  },
   heroImage: "https://iren.com/api/media/file/iren-childress-43.avif",
   secondaryImage: "https://iren.com/api/media/file/sweetwater.webp",
   summaryMetrics: [
