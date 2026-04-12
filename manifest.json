@@ -1,0 +1,18 @@
+{
+  "name": "IREN 실행리스크",
+  "short_name": "IREN Risk",
+  "description": "IREN 실행리스크 추적 대시보드",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6f8fa",
+  "theme_color": "#181818",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

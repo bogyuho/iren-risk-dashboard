@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IREN 실행리스크</title>
+  <meta name="theme-color" content="#181818">
+  <meta name="description" content="IREN 실행리스크 추적 대시보드">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="./icon.svg" type="image/svg+xml">
+  <style>
+    :root {
+      --ink: #181818;
+      --muted: #5d646b;
+      --line: #d8dee4;
+      --paper: #f6f8fa;
+      --white: #ffffff;
+      --green: #159a68;
+      --cyan: #087ea4;
+      --yellow: #d4a017;
+      --red: #cf3f3f;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      letter-spacing: 0;
+      line-height: 1.55;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    a {
+      color: var(--cyan);
+      text-decoration: none;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      overflow-wrap: anywhere;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 30px;
+      line-height: 1.15;
+    }
+
+    h2 {
+      margin: 28px 0 12px;
+      font-size: 21px;
+      line-height: 1.25;
+    }
+
+    h3 {
+      margin: 0 0 8px;
+      font-size: 17px;
+      line-height: 1.3;
+    }
+
+    p {
+      margin: 0 0 10px;
+    }
+
+    .wrap {
+      width: min(100%, 980px);
+      margin: 0 auto;
+      padding: 18px;
+    }
+
+    .hero {
+      background: var(--white);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .hero img {
+      max-height: 260px;
+      object-fit: cover;
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .stamp {
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 12px;
+    }
+
+    .scoreline {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .metric,
+    .risk,
+    .note,
+    .source {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+
+    .metric b {
+      display: block;
+      font-size: 21px;
+    }
+
+    .metric span,
+    .risk span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 4px 9px;
+      border-radius: 8px;
+      color: #111111;
+      background: #f3f4f6;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--yellow);
+    }
+
+    .green .dot {
+      background: var(--green);
+    }
+
+    .red .dot {
+      background: var(--red);
+    }
+
+    .cyan .dot {
+      background: var(--cyan);
+    }
+
+    .bar {
+      height: 9px;
+      overflow: hidden;
+      background: #e8edf2;
+      border-radius: 8px;
+      margin: 12px 0 8px;
+    }
+
+    .bar i {
+      display: block;
+      height: 100%;
+      border-radius: 8px;
+      background: var(--yellow);
+    }
+
+    .bar .greenbar {
+      background: var(--green);
+    }
+
+    .bar .redbar {
+      background: var(--red);
+    }
+
+    .bar .cyanbar {
+      background: var(--cyan);
+    }
+
+    .watch {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .watch li {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-left: 5px solid var(--cyan);
+      border-radius: 8px;
+      padding: 12px 14px;
+    }
+
+    .sources {
+      display: grid;
+      gap: 10px;
+    }
+
+    .source {
+      overflow-wrap: anywhere;
+      font-size: 14px;
+    }
+
+    @media (max-width: 720px) {
+      .wrap {
+        padding: 16px;
+      }
+
+      h1 {
+        font-size: 26px;
+      }
+
+      .scoreline,
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero img {
+        max-height: 210px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <img id="heroImage" alt="IREN Childress data center">
+    <div class="wrap">
+      <h1 id="title">IREN 실행리스크</h1>
+      <p id="lead" class="lead"></p>
+      <p id="stamp" class="stamp"></p>
+      <div id="metrics" class="scoreline"></div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section>
+      <h2>핵심 결론</h2>
+      <div class="note">
+        <p id="thesis"></p>
+      </div>
+    </section>
+
+    <section>
+      <h2>리스크 보드</h2>
+      <div id="risks" class="grid"></div>
+    </section>
+
+    <section>
+      <h2>다음 체크포인트</h2>
+      <ul id="watchlist" class="watch"></ul>
+    </section>
+
+    <section>
+      <h2>공식 이미지 기준</h2>
+      <img id="secondaryImage" alt="IREN Sweetwater substation">
+      <p class="stamp">공식 이미지는 공정률 판정 자료가 아니라 위치/자산 맥락 확인용이다.</p>
+    </section>
+
+    <section>
+      <h2>출처</h2>
+      <div id="sources" class="sources"></div>
+    </section>
+  </main>
+
+  <script src="./risk-data.js"></script>
+  <script>
+    const data = window.IREN_RISK_DATA;
+
+    function text(id, value) {
+      document.getElementById(id).textContent = value;
+    }
+
+    function barClass(tone) {
+      if (tone === "green") return "greenbar";
+      if (tone === "red") return "redbar";
+      if (tone === "cyan") return "cyanbar";
+      return "";
+    }
+
+    document.title = data.title;
+    document.getElementById("heroImage").src = data.heroImage;
+    document.getElementById("secondaryImage").src = data.secondaryImage;
+    text("title", data.title);
+    text("lead", `판정: ${data.verdict}`);
+    text("stamp", `업데이트: ${data.updatedAt}`);
+    text("thesis", data.thesis);
+
+    document.getElementById("metrics").innerHTML = data.summaryMetrics
+      .map((item) => `<div class="metric"><b>${item.value}</b><span>${item.label}</span></div>`)
+      .join("");
+
+    document.getElementById("risks").innerHTML = data.risks
+      .map(
+        (risk) => `
+          <article class="risk ${risk.tone}">
+            <h3>${risk.title}</h3>
+            <p class="status"><i class="dot"></i>${risk.status}</p>
+            <div class="bar"><i class="${barClass(risk.tone)}" style="width: ${risk.score}%"></i></div>
+            <span>${risk.why}</span>
+            <p class="stamp">${risk.next}</p>
+          </article>
+        `
+      )
+      .join("");
+
+    document.getElementById("watchlist").innerHTML = data.watchlist
+      .map((item, index) => `<li><b>${index + 1}. ${item}</b></li>`)
+      .join("");
+
+    document.getElementById("sources").innerHTML = data.sources
+      .map((source) => `<div class="source"><a href="${source.url}">${source.label}</a></div>`)
+      .join("");
+
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./sw.js").catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>
