@@ -97,7 +97,6 @@ main.wrap {
 
 .panel,
 .note,
-.install,
 .risk,
 .source,
 .watch li {
@@ -378,15 +377,13 @@ h2 {
 
 .note p,
 .risk p,
-.install p,
 .watch,
 .sources {
   margin: 0;
 }
 
 .note p,
-.risk p,
-.install p {
+.risk p {
   color: var(--soft-ink);
   line-height: 1.65;
   overflow-wrap: anywhere;
@@ -540,15 +537,6 @@ h2 {
   overflow-wrap: anywhere;
 }
 
-.install {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 12px;
-  align-items: center;
-  padding: 14px;
-  box-shadow: none;
-}
-
 button {
   min-height: 40px;
   border: 1px solid rgba(98, 214, 129, 0.58);
@@ -562,14 +550,6 @@ button {
 
 button[hidden] {
   display: none;
-}
-
-.install ol {
-  grid-column: 1 / -1;
-  margin: 0;
-  padding-left: 18px;
-  color: var(--muted);
-  line-height: 1.55;
 }
 
 .sources {
@@ -630,7 +610,6 @@ button[hidden] {
   .risk-grid,
   .audit-grid,
   .watch,
-  .install,
   .sources {
     grid-template-columns: 1fr;
   }

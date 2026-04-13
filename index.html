@@ -496,35 +496,8 @@
     }
 
     .note,
-    .install,
     .source {
       padding: 14px;
-    }
-
-    .install {
-      display: grid;
-      gap: 10px;
-    }
-
-    .install button {
-      width: 100%;
-      border: 0;
-      border-radius: 8px;
-      background: var(--ink);
-      color: #fff;
-      padding: 12px 14px;
-      font: inherit;
-      font-weight: 800;
-    }
-
-    .install button:disabled {
-      background: #9ba3a2;
-    }
-
-    .install ol {
-      margin: 0;
-      padding-left: 22px;
-      color: var(--muted);
     }
 
     .sources {
@@ -675,15 +648,6 @@
     </section>
 
     <section>
-      <h2>홈화면 추가</h2>
-      <div class="install">
-        <p id="installMessage">브라우저 메뉴에서 홈화면에 추가할 수 있다.</p>
-        <button id="installButton" type="button">홈화면에 추가</button>
-        <ol id="installSteps"></ol>
-      </div>
-    </section>
-
-    <section>
       <h2>출처</h2>
       <div id="sources" class="sources"></div>
     </section>
@@ -692,8 +656,6 @@
   <script src="./risk-data.js"></script>
   <script>
     const data = window.IREN_RISK_DATA;
-    let deferredInstallPrompt = null;
-
     function text(id, value) {
       document.getElementById(id).textContent = value;
     }
@@ -836,51 +798,6 @@
     document.getElementById("sources").innerHTML = data.sources
       .map((source) => `<div class="source"><a href="${source.url}">${source.label}</a></div>`)
       .join("");
-
-    const installButton = document.getElementById("installButton");
-    const installMessage = document.getElementById("installMessage");
-    const installSteps = document.getElementById("installSteps");
-    const userAgent = navigator.userAgent || "";
-    const isIOS = /iPad|iPhone|iPod/.test(userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-    const isStandalone = window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone;
-
-    function setInstallSteps(steps) {
-      installSteps.innerHTML = steps.map((step) => `<li>${step}</li>`).join("");
-    }
-
-    if (isStandalone) {
-      installMessage.textContent = "이미 홈화면 앱 모드로 열려 있다.";
-      installButton.disabled = true;
-      installButton.textContent = "추가 완료";
-      setInstallSteps([]);
-    } else if (isIOS) {
-      installMessage.textContent = "iPhone/iPad는 Safari 공유 메뉴에서 추가한다.";
-      installButton.textContent = "아래 순서로 추가";
-      installButton.disabled = true;
-      setInstallSteps(["Safari 하단 공유 버튼", "\"홈 화면에 추가\"", "추가"]);
-    } else {
-      installMessage.textContent = "Chrome/Edge에서 설치 조건이 충족되면 버튼이 활성화된다.";
-      installButton.disabled = true;
-      installButton.textContent = "설치 준비 중";
-      setInstallSteps(["브라우저 메뉴", "\"앱 설치\" 또는 \"홈 화면에 추가\""]);
-    }
-
-    window.addEventListener("beforeinstallprompt", (event) => {
-      event.preventDefault();
-      deferredInstallPrompt = event;
-      installButton.disabled = false;
-      installButton.textContent = "홈화면에 추가";
-      installMessage.textContent = "설치할 준비가 됐다.";
-    });
-
-    installButton.addEventListener("click", async () => {
-      if (!deferredInstallPrompt) return;
-      deferredInstallPrompt.prompt();
-      await deferredInstallPrompt.userChoice;
-      deferredInstallPrompt = null;
-      installButton.disabled = true;
-      installButton.textContent = "추가 요청 완료";
-    });
 
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {
