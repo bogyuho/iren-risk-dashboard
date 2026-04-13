@@ -660,6 +660,11 @@
     </section>
 
     <section>
+      <h2>10단계 신뢰도 루프</h2>
+      <div id="auditLoop" class="audit-grid"></div>
+    </section>
+
+    <section>
       <h2>리스크 보드</h2>
       <div id="risks" class="risk-grid"></div>
     </section>
@@ -803,9 +808,23 @@
             <h3>${risk.title}</h3>
             <span class="status">${risk.status}</span>
           </div>
+          <div class="risk-meta">
+            <span>신뢰도 ${risk.confidence || "검증중"}</span>
+            <span>${risk.evidence || "근거 보강중"}</span>
+          </div>
           <div class="bar"><i class="${barClass(risk.tone)}" style="width: ${risk.score}%"></i></div>
           <p>${risk.why}</p>
           <p class="risk-next">${risk.next}</p>
+        </article>
+      `)
+      .join("");
+
+    document.getElementById("auditLoop").innerHTML = (data.auditLoop || [])
+      .map((item) => `
+        <article class="audit tone-${item.tone}">
+          <b>${item.step}</b>
+          <p>${item.result}</p>
+          <span>신뢰도 ${item.confidence}</span>
         </article>
       `)
       .join("");

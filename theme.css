@@ -285,7 +285,7 @@ h1 {
 
 .metric-row {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 10px;
 }
 
@@ -398,10 +398,55 @@ h2 {
   gap: 12px;
 }
 
-.risk {
-  min-height: 228px;
+.audit-grid {
   display: grid;
-  grid-template-rows: auto auto 1fr auto;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.audit {
+  min-height: 134px;
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: linear-gradient(180deg, rgba(18, 21, 16, 0.98), rgba(8, 9, 8, 0.98));
+  padding: 12px;
+}
+
+.audit b {
+  color: var(--ink);
+  font-size: 0.92rem;
+  line-height: 1.25;
+}
+
+.audit p {
+  margin: 0;
+  color: var(--soft-ink);
+  font-size: 0.82rem;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.audit span,
+.risk-meta span {
+  width: fit-content;
+  max-width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.045);
+  padding: 5px 7px;
+  color: var(--muted);
+  font-size: 0.74rem;
+  font-weight: 900;
+  overflow-wrap: anywhere;
+}
+
+.risk {
+  min-height: 268px;
+  display: grid;
+  grid-template-rows: auto auto auto 1fr auto;
   gap: 10px;
   padding: 14px;
   box-shadow: none;
@@ -431,6 +476,12 @@ h2 {
   font-size: 0.78rem;
   font-weight: 950;
   overflow-wrap: anywhere;
+}
+
+.risk-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
 }
 
 .risk p {
@@ -546,7 +597,8 @@ button[hidden] {
 
 @media (max-width: 1020px) {
   .command,
-  .risk-grid {
+  .risk-grid,
+  .audit-grid {
     grid-template-columns: 1fr 1fr;
   }
 
@@ -576,6 +628,7 @@ button[hidden] {
   .metric-row,
   .evidence,
   .risk-grid,
+  .audit-grid,
   .watch,
   .install,
   .sources {
