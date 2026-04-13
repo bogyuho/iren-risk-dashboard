@@ -1,9 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <rect width="512" height="512" rx="72" fill="#181818"/>
-  <rect x="70" y="96" width="372" height="320" rx="28" fill="#f6f8fa"/>
-  <rect x="108" y="144" width="296" height="42" rx="8" fill="#087ea4"/>
-  <rect x="108" y="224" width="190" height="34" rx="8" fill="#d4a017"/>
-  <rect x="108" y="288" width="250" height="34" rx="8" fill="#159a68"/>
-  <rect x="108" y="352" width="150" height="34" rx="8" fill="#cf3f3f"/>
-  <text x="256" y="196" fill="#181818" font-family="Arial, sans-serif" font-size="72" font-weight="700" text-anchor="middle">IREN</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="IREN execution risk">
+  <rect width="512" height="512" rx="88" fill="#050505"/>
+  <rect x="28" y="28" width="456" height="456" rx="72" fill="#0b0d0b" stroke="#273125" stroke-width="8"/>
+
+  <path d="M122 382h268" stroke="#273125" stroke-width="18" stroke-linecap="round"/>
+  <path d="M256 370V178" stroke="#d6a35a" stroke-width="30" stroke-linecap="round"/>
+  <path d="M256 252c-52-16-82-48-98-90 58-5 98 17 121 70" fill="#62d681"/>
+  <path d="M260 246c55-24 94-18 128 12-44 42-92 52-136 15" fill="#5bbfd2"/>
+  <path d="M256 188c-18-44-8-82 26-114 34 42 37 82 4 124" fill="#62d681"/>
+  <circle cx="354" cy="140" r="38" fill="#ff6b64"/>
+  <circle cx="354" cy="140" r="16" fill="#050505"/>
+
+  <rect x="112" y="88" width="42" height="244" rx="18" fill="#f3f4ef"/>
+  <rect x="96" y="88" width="74" height="42" rx="16" fill="#f3f4ef"/>
+  <rect x="96" y="290" width="74" height="42" rx="16" fill="#f3f4ef"/>
+  <path d="M202 382h108" stroke="#62d681" stroke-width="24" stroke-linecap="round"/>
+  <path d="M334 382h58" stroke="#ff6b64" stroke-width="24" stroke-linecap="round"/>
 </svg>
