@@ -575,6 +575,127 @@ button[hidden] {
   text-decoration: underline;
 }
 
+.company-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.company-card {
+  display: grid;
+  gap: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: linear-gradient(180deg, rgba(18, 21, 16, 0.98), rgba(8, 9, 8, 0.98));
+  box-shadow: var(--shadow);
+  padding: 14px;
+}
+
+.company-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.company-card-head h3 {
+  margin: 4px 0 4px;
+  color: var(--ink);
+  font-size: 1.02rem;
+  line-height: 1.25;
+}
+
+.company-card-head p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 750;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.company-ticker,
+.company-grade,
+.company-pills span {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.company-ticker {
+  display: inline-flex;
+  padding: 4px 8px;
+  color: var(--cyan);
+  font-size: 0.78rem;
+  font-weight: 950;
+  letter-spacing: 0;
+}
+
+.company-grade {
+  flex: 0 0 auto;
+  max-width: 42%;
+  padding: 6px 9px;
+  color: var(--green);
+  font-size: 0.74rem;
+  font-weight: 950;
+  line-height: 1.35;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.company-judgment {
+  margin: 0;
+  color: var(--soft-ink);
+  font-size: 0.92rem;
+  font-weight: 780;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+
+.company-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.company-pills span {
+  padding: 6px 9px;
+  color: var(--ink);
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.company-card-body {
+  display: grid;
+  gap: 10px;
+}
+
+.company-card-body div {
+  border-top: 1px solid var(--line);
+  padding-top: 10px;
+}
+
+.company-card h4 {
+  margin: 0 0 6px;
+  color: var(--green);
+  font-size: 0.78rem;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.company-card ul {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--soft-ink);
+  font-size: 0.84rem;
+  line-height: 1.48;
+}
+
+.company-card li {
+  margin: 4px 0;
+  overflow-wrap: anywhere;
+}
+
 @media (max-width: 1020px) {
   .command,
   .risk-grid,
@@ -589,6 +710,12 @@ button[hidden] {
   .watch,
   .sources {
     grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 980px) {
+  .company-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 

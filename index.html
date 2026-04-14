@@ -651,6 +651,11 @@
       <h2>출처</h2>
       <div id="sources" class="sources"></div>
     </section>
+
+    <section>
+      <h2>네오클라우드 / 채굴 전환주 비교</h2>
+      <div id="companyCards" class="company-cards"></div>
+    </section>
   </main>
 
   <script src="./risk-data.js"></script>
@@ -672,6 +677,10 @@
       if (tone === "cyan") return "var(--cyan)";
       if (tone === "red") return "var(--red)";
       return "var(--yellow)";
+    }
+
+    function listItems(items) {
+      return (items || []).map((item) => `<li>${item}</li>`).join("");
     }
 
     function treeSvg(progress) {
@@ -797,6 +806,40 @@
 
     document.getElementById("sources").innerHTML = data.sources
       .map((source) => `<div class="source"><a href="${source.url}">${source.label}</a></div>`)
+      .join("");
+
+    document.getElementById("companyCards").innerHTML = (data.companyCards || [])
+      .map((company) => `
+        <article class="company-card">
+          <div class="company-card-head">
+            <div>
+              <span class="company-ticker">${company.ticker}</span>
+              <h3>${company.name}</h3>
+              <p>${company.category}</p>
+            </div>
+            <span class="company-grade">${company.grade}</span>
+          </div>
+          <p class="company-judgment">${company.judgment}</p>
+          <div class="company-pills">
+            <span>상방 ${company.upside}</span>
+            <span>리스크 ${company.risk}</span>
+          </div>
+          <div class="company-card-body">
+            <div>
+              <h4>매수 근거</h4>
+              <ul>${listItems(company.buyReasons)}</ul>
+            </div>
+            <div>
+              <h4>핵심 리스크</h4>
+              <ul>${listItems(company.risks)}</ul>
+            </div>
+            <div>
+              <h4>깨지는 조건</h4>
+              <ul>${listItems(company.breakpoints)}</ul>
+            </div>
+          </div>
+        </article>
+      `)
       .join("");
 
     if ("serviceWorker" in navigator) {
