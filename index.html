@@ -654,6 +654,7 @@
 
     <section>
       <h2>네오클라우드 / 채굴 전환주 비교</h2>
+      <div id="companyCardsNote" class="note"></div>
       <div id="companyCards" class="company-cards"></div>
     </section>
   </main>
@@ -841,6 +842,12 @@
         </article>
       `)
       .join("");
+
+    if (data.companyCardsNote) {
+      document.getElementById("companyCardsNote").innerHTML = `<p>${data.companyCardsNote}</p>`;
+    } else {
+      document.getElementById("companyCardsNote").remove();
+    }
 
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {

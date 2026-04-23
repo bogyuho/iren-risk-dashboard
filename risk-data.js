@@ -1,5 +1,5 @@
 window.IREN_RISK_DATA = {
-  updatedAt: "2026-04-23 KST / 공식 근거 재검증",
+  updatedAt: "2026-04-23 KST / IREN 핵심 공식 근거 재확인",
   title: "IREN 실행리스크",
   verdict: "새 공식 진전 없음, 핵심 병목 유지",
   thesis:
@@ -163,6 +163,8 @@ window.IREN_RISK_DATA = {
     "ERCOT/SB6 large load queue, load ramp, curtailment 조건",
     "채용공고가 construction에서 operations/commissioning으로 이동하는 속도"
   ],
+  companyCardsNote:
+    "이 비교 카드는 IREN 메인 리스크보드와 별도 참고 섹션이다. 2026-04-23에 다시 확인한 핵심 공식 근거 범위는 IREN SEC filing, IREN 공식 페이지, AI Cloud/Childress 상태이며, 아래 비교 카드 전체를 같은 날짜로 재검증한 것은 아니다.",
   companyCards: [
     {
       ticker: "CRWV",
