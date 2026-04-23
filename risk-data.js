@@ -1,17 +1,17 @@
 window.IREN_RISK_DATA = {
-  updatedAt: "2026-04-13 KST / 10단계 루프",
+  updatedAt: "2026-04-23 KST / 공식 근거 재검증",
   title: "IREN 실행리스크",
-  verdict: "상업가동 미확인 유지, 근거 신뢰도 상향",
+  verdict: "새 공식 진전 없음, 핵심 병목 유지",
   thesis:
-    "SEC·공식 IREN·공식 SNS·전력/채용/공공기록을 10단계로 다시 돌렸다. 계약, 자금, GPU 조달, Childress 현장공사 신호는 더 단단해졌지만, 매출 전환의 문인 Delivery Notice, Supplier validation, Microsoft acceptance, Tranche 1/2 single-cluster merge, Sweetwater 1 energization 완료는 2026-04-13 기준 여전히 공개 확인 전이다.",
+    "2026-04-23 기준 SEC, IREN 공식 페이지, 최근 filing, AI Cloud/Childress 공식 페이지를 다시 확인했다. 계약, 조달, 자금, Childress 부지·전력 서사는 유지되지만, 매출 전환의 문인 Delivery Notice, Supplier validation, Microsoft acceptance, Tranche 1/2 single-cluster merge, Sweetwater 1 energization 완료는 여전히 공개 확인 전이다.",
   executionTree: {
     progress: 52,
     label: "실행 증거 성숙도",
-    stage: "공사·조달 증거 강화 / MS 승인 전",
+    stage: "새 공식 진전 없음 / MS 승인 전",
     blocker: "Microsoft acceptance",
     nextEvent: "Delivery Notice",
     interpretation:
-      "뿌리와 줄기인 계약·장비·자금·부지는 SEC와 공식자료로 확인된다. 가지인 Childress 현장공사는 공식 SNS·채용·공공기록 보조증거가 늘었다. 잎과 열매인 commissioning, single-cluster merge, Microsoft acceptance, Sweetwater energization은 아직 공개 확인 전이다.",
+      "뿌리와 줄기인 계약·장비·자금·부지는 SEC와 공식자료로 확인된다. 2026-04-23 재검증에서도 Childress 부지·전력·AI Cloud 서사는 유지됐지만, commissioning, single-cluster merge, Microsoft acceptance, Sweetwater energization은 아직 공개 확인 전이다.",
     checkpoints: [
       { label: "계약/자금", status: "확인됨", tone: "green" },
       { label: "현장공사", status: "증거 강화", tone: "cyan" },
@@ -22,20 +22,20 @@ window.IREN_RISK_DATA = {
   heroImage: "https://iren.com/api/media/file/iren-childress-43.avif",
   secondaryImage: "https://iren.com/api/media/file/sweetwater.webp",
   summaryMetrics: [
-    { label: "SEC 최신 filing", value: "3/4 이후 없음" },
-    { label: "신뢰도 루프", value: "10/10 완료" },
+    { label: "SEC 최신 filing", value: "3/4 이후 새 filing 없음" },
+    { label: "공식 재검증", value: "4/23 완료" },
     { label: "상업 가동", value: "MS 승인 전" },
-    { label: "전력 병목", value: "Sweetwater 미공시" }
+    { label: "전력 병목", value: "Sweetwater 완료 미공시" }
   ],
   auditLoop: [
-    { step: "SEC 최신 filing", result: "2026-03-04 이후 새 IREN filing 없음", confidence: "높음", tone: "green" },
-    { step: "SEC full-text", result: "Acceptance / Delivery Notice / Sweetwater 완료 hit 없음", confidence: "높음", tone: "red" },
+    { step: "SEC 최신 filing", result: "2026-03-04 이후 새 IREN filing 없음 (4/23 재확인)", confidence: "높음", tone: "green" },
+    { step: "SEC full-text", result: "Acceptance / Delivery Notice / Sweetwater 완료 hit 없음 (4/23 재검색)", confidence: "높음", tone: "red" },
     { step: "Microsoft SOW", result: "Acceptance 후 월별 과금, rejection/cure 구조 확인", confidence: "높음", tone: "red" },
     { step: "Dell 8-K", result: "3.5B 달러 H2 2026 조달계약, post-shipment 지급", confidence: "높음", tone: "cyan" },
     { step: "ATM 8-K", result: "60억 달러 ATM, 기존 10억 달러 ATM 소진 확인", confidence: "높음", tone: "red" },
     { step: "IREN 공식 뉴스", result: "3/4 AI Cloud 이후 새 공식 뉴스 없음", confidence: "높음", tone: "yellow" },
-    { step: "Childress 공식/SNS", result: "H1/H2·H3/H4 공사 신호, load banking 신호", confidence: "중상", tone: "cyan" },
-    { step: "Sweetwater 공식", result: "2026 energization 목표, 완료 공시는 없음", confidence: "높음", tone: "red" },
+    { step: "AI Cloud/Childress 공식", result: "AI Cloud와 Childress 공식 페이지 내용 유지, completion 공시는 없음", confidence: "높음", tone: "cyan" },
+    { step: "Sweetwater 공식", result: "2026 energization 목표 유지, 완료 공시는 없음", confidence: "높음", tone: "red" },
     { step: "ERCOT/SB6", result: "대형부하 75MW+ 규제·비용·curtailment 리스크", confidence: "중상", tone: "red" },
     { step: "채용/공공기록", result: "운영·commissioning 채용과 TDLR 보조증거 확인", confidence: "중간", tone: "cyan" }
   ],
@@ -48,7 +48,7 @@ window.IREN_RISK_DATA = {
       confidence: "높음",
       evidence: "SEC SOW / SEC full-text",
       why:
-        "TCV 9.7B 달러와 선급금 구조는 확인됐다. 다만 월별 과금은 각 GPU Service가 Minimum GPU Quantity를 넘기고 Microsoft Acceptance를 받아야 시작된다. 2026-04-13 기준 acceptance 확인 filing은 없다.",
+        "TCV 9.7B 달러와 선급금 구조는 확인됐다. 다만 월별 과금은 각 GPU Service가 Minimum GPU Quantity를 넘기고 Microsoft Acceptance를 받아야 시작된다. 2026-04-23 기준 acceptance 확인 filing은 없다.",
       next: "Delivery Notice, Microsoft acceptance/rejection, cure notice, delay credit, GPU Service termination 단서를 최우선 추적한다."
     },
     {
@@ -114,7 +114,7 @@ window.IREN_RISK_DATA = {
       confidence: "높음",
       evidence: "IREN 공식 페이지 / SEC search",
       why:
-        "공식 페이지는 Sweetwater 1의 2026년 substation energization과 under construction 상태를 말한다. 2026-04-13 기준 SEC full-text에서 완료 확인은 찾지 못했다.",
+        "공식 페이지는 Sweetwater 1의 2026년 substation energization과 under construction 상태를 말한다. 2026-04-23 기준 SEC full-text와 공식 사이트에서 완료 확인은 찾지 못했다.",
       next: "회사 공지, 전력사/카운티 기록, 위성사진에서 345kV/138kV bulk substation energization 증거를 확인한다."
     },
     {
