@@ -589,6 +589,14 @@
       <span class="pill">IREN Execution</span>
       <span id="stamp"></span>
     </div>
+    <nav class="jumpbar" aria-label="섹션 이동">
+      <a href="#overview">개요</a>
+      <a href="#audit">루프</a>
+      <a href="#risks-section">리스크</a>
+      <a href="#watch-section">체크포인트</a>
+      <a href="#sources-section">출처</a>
+      <a href="#compare-section">비교</a>
+    </nav>
     <div class="command">
       <section class="panel growth" aria-label="실행 성숙도">
         <div class="growth-head">
@@ -625,35 +633,65 @@
   </header>
 
   <main class="wrap">
-    <section>
-      <h2>핵심 결론</h2>
+    <section id="overview" class="content-block">
+      <div class="section-head">
+        <div>
+          <h2>핵심 결론</h2>
+          <p>지금 당장 봐야 하는 공식 근거와 핵심 병목만 요약한다.</p>
+        </div>
+      </div>
       <div class="note">
         <p id="thesis"></p>
       </div>
     </section>
 
-    <section>
-      <h2>10단계 신뢰도 루프</h2>
+    <section id="audit" class="content-block">
+      <div class="section-head">
+        <div>
+          <h2>10단계 신뢰도 루프</h2>
+          <p>이번 판정이 어떤 공식 근거와 보조 근거에서 나왔는지 단계별로 보여준다.</p>
+        </div>
+      </div>
       <div id="auditLoop" class="audit-grid"></div>
     </section>
 
-    <section>
-      <h2>리스크 보드</h2>
+    <section id="risks-section" class="content-block">
+      <div class="section-head">
+        <div>
+          <h2>리스크 보드</h2>
+          <p>각 축의 현재 상태, 왜 중요한지, 다음 확인할 증거를 한 번에 본다.</p>
+        </div>
+      </div>
       <div id="risks" class="risk-grid"></div>
     </section>
 
-    <section>
-      <h2>다음 체크포인트</h2>
+    <section id="watch-section" class="content-block">
+      <div class="section-head">
+        <div>
+          <h2>다음 체크포인트</h2>
+          <p>다음 업데이트 때 가장 먼저 봐야 할 증거를 우선순위대로 정리한다.</p>
+        </div>
+      </div>
       <ul id="watchlist" class="watch"></ul>
     </section>
 
-    <section>
-      <h2>출처</h2>
+    <section id="sources-section" class="content-block">
+      <div class="section-head">
+        <div>
+          <h2>출처</h2>
+          <p>공개 링크만 남긴다. SEC, 회사 공식 자료, 공개 보조근거만 포함한다.</p>
+        </div>
+      </div>
       <div id="sources" class="sources"></div>
     </section>
 
-    <section>
-      <h2>네오클라우드 / 채굴 전환주 비교</h2>
+    <section id="compare-section" class="content-block">
+      <div class="section-head">
+        <div>
+          <h2>네오클라우드 / 채굴 전환주 비교</h2>
+          <p>IREN 메인 리스크보드와는 분리된 참고 카드다. 상대 비교용으로만 본다.</p>
+        </div>
+      </div>
       <div id="companyCardsNote" class="note"></div>
       <div id="companyCards" class="company-cards"></div>
     </section>
